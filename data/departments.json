@@ -1,0 +1,122 @@
+{
+  "water": {
+    "issue_type": "water",
+    "keywords": ["paani", "water", "supply", "pipeline", "boring", "nalkoop", "pani"],
+    "department": "Municipal Corporation / AMC",
+    "officer": "Water Supply Officer",
+    "escalation_officer": "Municipal Commissioner",
+    "act": "Water Supply and Sewerage Act",
+    "section": "Section 49",
+    "sla_days": 7,
+    "pgportal_category": "Drinking Water",
+    "contact": "155303"
+  },
+  "electricity": {
+    "issue_type": "electricity",
+    "keywords": ["bijli", "electricity", "light", "power", "current", "transformer", "meter", "bill"],
+    "department": "GUVNL / DISCOM",
+    "officer": "Assistant Engineer (AE)",
+    "escalation_officer": "Superintending Engineer",
+    "act": "Electricity Act 2003",
+    "section": "Section 43",
+    "sla_days": 7,
+    "pgportal_category": "Electricity",
+    "contact": "1912"
+  },
+  "road": {
+    "issue_type": "road",
+    "keywords": ["sadak", "road", "pothole", "gaddha", "street", "footpath", "divider"],
+    "department": "Municipal Corporation / PWD",
+    "officer": "Executive Engineer",
+    "escalation_officer": "District Collector",
+    "act": "Municipal Corporation Act",
+    "section": "Section 63",
+    "sla_days": 15,
+    "pgportal_category": "Roads and Bridges",
+    "contact": "155304"
+  },
+  "rti": {
+    "issue_type": "rti",
+    "keywords": ["rti", "information", "jaankari", "right to information", "soochna", "document"],
+    "department": "Concerned Public Authority",
+    "officer": "Public Information Officer (PIO)",
+    "escalation_officer": "First Appellate Authority",
+    "act": "Right to Information Act 2005",
+    "section": "Section 6",
+    "sla_days": 30,
+    "pgportal_category": "RTI",
+    "contact": "pgportal.gov.in"
+  },
+  "pension": {
+    "issue_type": "pension",
+    "keywords": ["pension", "old age", "vridha", "widow", "vidhwa", "disability", "divyang"],
+    "department": "Social Justice & Empowerment Department",
+    "officer": "District Social Security Officer",
+    "escalation_officer": "Director, Social Security",
+    "act": "National Social Assistance Programme",
+    "section": "NSAP Guidelines",
+    "sla_days": 30,
+    "pgportal_category": "Social Welfare",
+    "contact": "14567"
+  },
+  "ration": {
+    "issue_type": "ration",
+    "keywords": ["ration", "rashan", "pds", "food", "anaj", "wheat", "gehu", "rice", "chawal", "card"],
+    "department": "Food & Civil Supplies Department",
+    "officer": "District Supply Officer",
+    "escalation_officer": "Commissioner, Food & Supplies",
+    "act": "National Food Security Act 2013",
+    "section": "Section 8",
+    "sla_days": 15,
+    "pgportal_category": "Food and Public Distribution",
+    "contact": "1967"
+  },
+  "sanitation": {
+    "issue_type": "sanitation",
+    "keywords": ["safai", "garbage", "kachra", "sanitation", "drain", "nali", "sewage", "toilet", "sewer"],
+    "department": "Municipal Corporation",
+    "officer": "Sanitation Officer",
+    "escalation_officer": "Health Officer",
+    "act": "Solid Waste Management Rules 2016",
+    "section": "Rule 4",
+    "sla_days": 3,
+    "pgportal_category": "Sanitation and Hygiene",
+    "contact": "155304"
+  },
+  "land": {
+    "issue_type": "land",
+    "keywords": ["zameen", "land", "property", "plot", "registry", "mutation", "nakal", "khasra"],
+    "department": "Revenue Department",
+    "officer": "Tehsildar",
+    "escalation_officer": "District Collector",
+    "act": "Land Revenue Code",
+    "section": "Section 135",
+    "sla_days": 30,
+    "pgportal_category": "Land Records",
+    "contact": "1800-180-6127"
+  },
+  "hospital": {
+    "issue_type": "hospital",
+    "keywords": ["hospital", "doctor", "dawai", "medicine", "health", "swasthya", "nurse", "ambulance"],
+    "department": "Health Department",
+    "officer": "Chief Medical Officer (CMO)",
+    "escalation_officer": "Director Health Services",
+    "act": "Clinical Establishments Act 2010",
+    "section": "Section 11",
+    "sla_days": 7,
+    "pgportal_category": "Health",
+    "contact": "104"
+  },
+  "school": {
+    "issue_type": "school",
+    "keywords": ["school", "teacher", "shiksha", "education", "vidyalay", "student", "mid day meal"],
+    "department": "Education Department",
+    "officer": "Block Education Officer (BEO)",
+    "escalation_officer": "District Education Officer (DEO)",
+    "act": "Right to Education Act 2009",
+    "section": "Section 8",
+    "sla_days": 15,
+    "pgportal_category": "Education",
+    "contact": "1800-180-6127"
+  }
+}

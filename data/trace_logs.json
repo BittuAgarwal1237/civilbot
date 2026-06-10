@@ -1,0 +1,19 @@
+[
+  {
+    "id": 1,
+    "complaint_id": 1,
+    "agent_name": "classifier",
+    "input_data": "street light kam nhi kar rahi from 2 days ",
+    "output_data": {
+      "issue_type": "electricity",
+      "urgency": 3,
+      "language": "hindi",
+      "jurisdiction": "municipal",
+      "confidence": 0.9,
+      "reason": "Street lights are essential for public safety and visibility, and their malfunction for two days significantly impacts daily life."
+    },
+    "confidence": 0.9,
+    "duration_ms": 5329,
+    "created_at": "2026-06-10T16:00:19.034600"
+  }
+]

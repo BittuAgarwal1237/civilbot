@@ -1,0 +1,6 @@
+openai
+langgraph
+streamlit
+reportlab
+pymupdf
+python-dotenv
