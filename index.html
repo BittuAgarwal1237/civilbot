@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Civic Copilot</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  --bg: #0a0a0f;
+  --surface: #12121a;
+  --surface2: #1a1a26;
+  --border: #2a2a3d;
+  --accent: #6c63ff;
+  --accent2: #ff6584;
+  --green: #00d4aa;
+  --yellow: #ffd166;
+  --red: #ff4757;
+  --text: #e8e8f0;
+  --text2: #8888aa;
+  --text3: #4a4a6a;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:'Inter',sans-serif; min-height:100vh; }
+
+/* HEADER */
+.header {
+  border-bottom:1px solid var(--border);
+  padding:18px 40px;
+  display:flex; align-items:center; gap:14px;
+  background:var(--surface);
+  position:sticky; top:0; z-index:10;
+}
+.logo {
+  width:38px; height:38px;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  border-radius:10px; display:flex; align-items:center;
+  justify-content:center; font-size:20px;
+}
+.header-title { font-size:18px; font-weight:600; }
+.badge {
+  margin-left:auto; font-size:10px; font-weight:600;
+  padding:4px 10px; border-radius:20px;
+  background:rgba(108,99,255,0.15); color:var(--accent);
+  border:1px solid rgba(108,99,255,0.3);
+}
+
+/* MAIN */
+.main { max-width:1080px; margin:0 auto; padding:40px 24px; }
+
+/* INPUT CARD */
+.input-card {
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:16px; padding:28px; margin-bottom:24px;
+}
+.input-label {
+  font-size:13px; font-weight:500; color:var(--text2);
+  margin-bottom:12px; display:flex; align-items:center; gap:8px;
+}
+textarea {
+  width:100%; background:var(--bg); border:1px solid var(--border);
+  border-radius:12px; color:var(--text); font-family:'Inter',sans-serif;
+  font-size:15px; line-height:1.6; padding:16px;
+  resize:vertical; min-height:120px; outline:none;
+  transition:border-color 0.2s;
+}
+textarea:focus { border-color:var(--accent); }
+textarea::placeholder { color:var(--text3); }
+
+.input-row {
+  display:flex; align-items:center;
+  justify-content:space-between; margin-top:16px;
+}
+.hint { font-size:12px; color:var(--text3); }
+
+.run-btn {
+  background:linear-gradient(135deg,var(--accent),#8b5cf6);
+  border:none; border-radius:10px; color:#fff;
+  font-size:14px; font-weight:600; padding:12px 28px;
+  cursor:pointer; display:flex; align-items:center; gap:8px;
+  transition:opacity 0.2s, transform 0.1s;
+}
+.run-btn:hover { opacity:0.88; transform:translateY(-1px); }
+.run-btn:disabled { opacity:0.45; cursor:not-allowed; transform:none; }
+
+/* PIPELINE */
+.pipeline-wrap { margin-bottom:24px; display:none; }
+.pipeline-wrap.show { display:block; }
+.sec-label {
+  font-size:11px; font-weight:600; color:var(--text2);
+  text-transform:uppercase; letter-spacing:.08em; margin-bottom:12px;
+}
+.agents-row { display:flex; gap:10px; flex-wrap:wrap; }
+.chip {
+  flex:1; min-width:150px; display:flex; align-items:center; gap:10px;
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:10px; padding:11px 16px; font-size:13px; font-weight:500;
+  transition:all 0.3s; color:var(--text3);
+}
+.chip.running { border-color:var(--accent); background:rgba(108,99,255,.08); color:var(--accent); }
+.chip.done    { border-color:var(--green);  background:rgba(0,212,170,.08);  color:var(--green); }
+.dot { width:8px; height:8px; border-radius:50%; background:currentColor; flex-shrink:0; }
+.dot.blink { animation:blink 1s infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.25} }
+
+/* ERROR */
+.err {
+  background:rgba(255,71,87,.08); border:1px solid rgba(255,71,87,.3);
+  border-radius:12px; padding:16px 20px; color:var(--red);
+  font-size:14px; margin-bottom:20px; display:none;
+}
+.err.show { display:block; }
+
+/* RESULTS */
+.results { display:none; }
+.results.show { display:block; }
+.grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+
+/* CARD */
+.card {
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:14px; padding:22px;
+}
+.card-title {
+  font-size:11px; font-weight:600; color:var(--text2);
+  text-transform:uppercase; letter-spacing:.08em;
+  margin-bottom:16px; display:flex; align-items:center; gap:6px;
+}
+.card-title em { font-size:15px; font-style:normal; }
+
+/* TAGS */
+.tags { display:flex; flex-wrap:wrap; gap:8px; }
+.tag {
+  font-size:12px; font-weight:500; padding:4px 12px;
+  border-radius:20px; border:1px solid;
+}
+.tp { color:var(--accent); border-color:rgba(108,99,255,.4); background:rgba(108,99,255,.1); }
+.tg { color:var(--green);  border-color:rgba(0,212,170,.4);  background:rgba(0,212,170,.1); }
+.ty { color:var(--yellow); border-color:rgba(255,209,102,.4);background:rgba(255,209,102,.1);}
+.tr { color:var(--red);    border-color:rgba(255,71,87,.4);  background:rgba(255,71,87,.1); }
+
+/* URGENCY */
+.urg-num { font-size:28px; font-weight:700; margin:14px 0 4px; }
+.urg-sub { font-size:12px; color:var(--text2); margin-bottom:8px; }
+.urg-bar { height:6px; border-radius:3px; background:var(--border); overflow:hidden; }
+.urg-fill {
+  height:100%; border-radius:3px;
+  background:linear-gradient(90deg,var(--green),var(--yellow),var(--red));
+  transition:width 1.2s ease;
+}
+
+/* DEPT */
+.rows { display:flex; flex-direction:column; gap:10px; }
+.row-item { display:flex; flex-direction:column; gap:2px; }
+.row-key { font-size:11px; color:var(--text2); }
+.row-val { font-size:14px; font-weight:500; }
+.esc-banner {
+  margin-top:12px; padding:10px 14px;
+  background:rgba(255,71,87,.1); border:1px solid rgba(255,71,87,.3);
+  border-radius:8px; font-size:13px; color:var(--red);
+  display:none; align-items:center; gap:8px;
+}
+
+/* FACTS */
+.fact-list { list-style:none; display:flex; flex-direction:column; gap:8px; }
+.fact {
+  font-size:13px; line-height:1.5; padding:9px 12px;
+  background:var(--surface2); border-radius:8px;
+  border-left:3px solid var(--accent);
+}
+
+/* LETTER */
+.full { grid-column:1/-1; }
+.letter-box {
+  background:var(--bg); border:1px solid var(--border);
+  border-radius:10px; padding:20px;
+  font-family:'JetBrains Mono',monospace; font-size:12px;
+  line-height:1.85; white-space:pre-wrap;
+  max-height:320px; overflow-y:auto; color:var(--text);
+}
+.letter-box::-webkit-scrollbar { width:4px; }
+.letter-box::-webkit-scrollbar-thumb { background:var(--border); border-radius:2px; }
+.copy-btn {
+  float:right; font-size:12px; padding:4px 12px;
+  background:var(--surface2); border:1px solid var(--border);
+  border-radius:6px; color:var(--text2); cursor:pointer;
+  transition:all .2s;
+}
+.copy-btn:hover { color:var(--text); border-color:var(--accent); }
+
+/* TASKS */
+.task-list { display:flex; flex-direction:column; gap:10px; }
+.task {
+  display:flex; gap:14px; padding:14px 16px;
+  background:var(--surface2); border:1px solid var(--border); border-radius:10px;
+}
+.t-icon { font-size:18px; flex-shrink:0; }
+.t-body { flex:1; }
+.t-action { font-size:14px; font-weight:500; margin-bottom:5px; }
+.t-meta { font-size:12px; color:var(--text2); display:flex; gap:12px; flex-wrap:wrap; }
+
+/* RESPONSIVE */
+@media(max-width:680px){
+  .grid { grid-template-columns:1fr; }
+  .full { grid-column:1; }
+  .header { padding:14px 16px; }
+  .main { padding:20px 14px; }
+  .agents-row { flex-direction:column; }
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="logo">🏛️</div>
+  <div>
+    <div class="header-title">Civic Copilot</div>
+  </div>
+  <span class="badge">NVIDIA Hackathon — Track A</span>
+</header>
+
+<main class="main">
+
+  <div class="input-card">
+    <div class="input-label">📝 Apni complaint ya government notice yahan likho</div>
+    <textarea id="txt" placeholder="Example: Hamare mohalle mein pichhle 5 din se paani nahi aa raha. AMC ko call kiya lekin koi jawab nahi. 50 families prabhavit hain..."></textarea>
+    <div class="input-row">
+      <span class="hint">Hindi ya English — Ctrl+Enter se bhi run kar sakte ho</span>
+      <button class="run-btn" id="btn" onclick="run()">⚡ Action Plan Banao</button>
+    </div>
+  </div>
+
+  <div class="err" id="err"></div>
+
+  <div class="pipeline-wrap" id="pipe">
+    <div class="sec-label">Pipeline Running</div>
+    <div class="agents-row" id="chips"></div>
+  </div>
+
+  <div class="results" id="results">
+    <div class="grid">
+
+      <div class="card">
+        <div class="card-title"><em>🔍</em> Classification</div>
+        <div class="tags" id="cTags"></div>
+        <div class="urg-num" id="urgNum"></div>
+        <div class="urg-sub">Urgency Level</div>
+        <div class="urg-bar"><div class="urg-fill" id="urgFill" style="width:0%"></div></div>
+      </div>
+
+      <div class="card">
+        <div class="card-title"><em>🏛️</em> Department Routed</div>
+        <div class="rows" id="dRows"></div>
+        <div class="esc-banner" id="escBanner">🚨 Immediate escalation required!</div>
+      </div>
+
+      <div class="card">
+        <div class="card-title"><em>📋</em> Evidence Extracted</div>
+        <ul class="fact-list" id="facts"></ul>
+      </div>
+
+      <div class="card">
+        <div class="card-title"><em>📊</em> Summary</div>
+        <div class="rows" id="sumRows"></div>
+      </div>
+
+      <div class="card full">
+        <div class="card-title"><em>📄</em> Generated Letter <button class="copy-btn" onclick="copyLetter()">Copy</button></div>
+        <div class="letter-box" id="letter"></div>
+      </div>
+
+      <div class="card full">
+        <div class="card-title"><em>✅</em> Action Plan</div>
+        <div class="task-list" id="tasks"></div>
+      </div>
+
+    </div>
+  </div>
+
+</main>
+
+<script>
+const NAMES = ["Classifier","Evidence Extractor","Dept Router","Response Drafter","Task Generator"];
+
+function buildChips() {
+  document.getElementById("chips").innerHTML = NAMES.map((n,i) =>
+    `<div class="chip" id="c${i}"><div class="dot"></div>${n}</div>`
+  ).join("");
+}
+
+function setChip(i, state) {
+  const el = document.getElementById("c"+i);
+  el.className = "chip " + state;
+  el.innerHTML = `<div class="dot ${state==="running"?"blink":""}"></div>${NAMES[i]}`;
+}
+
+async function animChips() {
+  buildChips();
+  document.getElementById("pipe").classList.add("show");
+  for (let i=0;i<5;i++) {
+    setChip(i,"running");
+    await new Promise(r=>setTimeout(r,750));
+  }
+}
+
+function doneChips() { for(let i=0;i<5;i++) setChip(i,"done"); }
+
+async function run() {
+  const txt = document.getElementById("txt").value.trim();
+  if (!txt) { alert("Pehle complaint likho!"); return; }
+
+  const btn = document.getElementById("btn");
+  btn.disabled = true;
+  btn.textContent = "⏳ Processing...";
+
+  document.getElementById("results").classList.remove("show");
+  document.getElementById("err").classList.remove("show");
+  document.getElementById("escBanner").style.display = "none";
+
+  animChips();
+
+  try {
+    const res = await fetch("/run", {
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body: JSON.stringify({complaint: txt})
+    });
+    const d = await res.json();
+    doneChips();
+
+    if (d.error) {
+      document.getElementById("err").textContent = "❌ " + d.error;
+      document.getElementById("err").classList.add("show");
+    } else {
+      render(d);
+    }
+  } catch(e) {
+    doneChips();
+    document.getElementById("err").textContent = "❌ " + e.message;
+    document.getElementById("err").classList.add("show");
+  }
+
+  btn.disabled = false;
+  btn.innerHTML = "⚡ Action Plan Banao";
+}
+
+function render(d) {
+  const clf = d.classifier_result;
+  const dept = d.dept_result;
+  const ev = d.evidence;
+  const dr = d.draft_result;
+  const tasks = d.tasks;
+
+  // Tags
+  document.getElementById("cTags").innerHTML =
+    `<span class="tag tp">${clf.issue_type}</span>
+     <span class="tag tg">${clf.language}</span>
+     <span class="tag ty">${clf.jurisdiction}</span>
+     ${clf.confidence ? `<span class="tag tp">${Math.round(clf.confidence*100)}% confident</span>` : ""}`;
+
+  // Urgency
+  document.getElementById("urgNum").textContent = clf.urgency + "/5";
+  setTimeout(() => {
+    document.getElementById("urgFill").style.width = (clf.urgency/5*100)+"%";
+  }, 100);
+
+  // Dept
+  document.getElementById("dRows").innerHTML = [
+    ["Department", dept.department],
+    ["Officer", dept.officer],
+    ["Legal Ref", `${dept.act} — ${dept.section}`],
+    ["SLA", `${dept.sla_days} days`],
+    ["Contact", dept.contact]
+  ].map(([k,v]) => `<div class="row-item"><span class="row-key">${k}</span><span class="row-val">${v}</span></div>`).join("");
+
+  if (dept.escalate_immediately) {
+    const b = document.getElementById("escBanner");
+    b.style.display = "flex";
+  }
+
+  // Facts
+  document.getElementById("facts").innerHTML =
+    (ev.key_facts||[]).map(f => `<li class="fact">${f}</li>`).join("");
+
+  // Summary
+  document.getElementById("sumRows").innerHTML = [
+    ["Letter Type", dr.letter_type],
+    ["Addressed To", dr.addressed_to],
+    ["Deadline", dr.response_deadline],
+    ["Total Tasks", tasks.length + " action items"]
+  ].map(([k,v]) => `<div class="row-item"><span class="row-key">${k}</span><span class="row-val">${v}</span></div>`).join("");
+
+  // Letter
+  document.getElementById("letter").textContent = dr.letter_text;
+
+  // Tasks
+  const icons = {CRITICAL:"🚨",HIGH:"🔴",MEDIUM:"🟡",LOW:"🟢"};
+  document.getElementById("tasks").innerHTML = tasks.map(t => `
+    <div class="task">
+      <div class="t-icon">${icons[t.priority]||"🔵"}</div>
+      <div class="t-body">
+        <div class="t-action">${t.action}</div>
+        <div class="t-meta">
+          <span>📅 ${t.due_date}</span>
+          <span>👤 ${t.responsible_officer}</span>
+          <span>📡 ${t.channel}</span>
+          ${t.escalate_to ? `<span>⬆️ ${t.escalate_to}</span>` : ""}
+        </div>
+      </div>
+    </div>`).join("");
+
+  document.getElementById("results").classList.add("show");
+  document.getElementById("results").scrollIntoView({behavior:"smooth"});
+}
+
+function copyLetter() {
+  navigator.clipboard.writeText(document.getElementById("letter").textContent);
+  const b = document.querySelector(".copy-btn");
+  b.textContent = "Copied!";
+  setTimeout(()=>b.textContent="Copy", 2000);
+}
+
+document.addEventListener("keydown", e => {
+  if (e.ctrlKey && e.key==="Enter") run();
+});
+</script>
+</body>
+</html>

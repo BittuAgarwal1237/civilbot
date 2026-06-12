@@ -15,5 +15,298 @@
     "confidence": 0.9,
     "duration_ms": 5329,
     "created_at": "2026-06-10T16:00:19.034600"
+  },
+  {
+    "id": 2,
+    "complaint_id": 2,
+    "agent_name": "classifier",
+    "input_data": " street camera is not working ",
+    "output_data": {
+      "issue_type": "other",
+      "urgency": 2,
+      "language": "english",
+      "jurisdiction": "municipal",
+      "confidence": 0.8,
+      "reason": "Non-functional street camera is a minor inconvenience and falls under municipal responsibility."
+    },
+    "confidence": 0.8,
+    "duration_ms": 5018,
+    "created_at": "2026-06-10T17:48:48.278794"
+  },
+  {
+    "id": 3,
+    "complaint_id": 1,
+    "agent_name": "evidence_extractor",
+    "input_data": "Mera naam Ramesh Kumar hai. Hamare Ward 14, Satellite Area, Ahmedabad mein pichhle 10 din se bijli ki problem hai. Maine 15 June ko GUVNL office mein complaint ki thi jiska ticket number GUV-2341 hai lekin abhi tak koi nahi aaya. Transformer kharab hai jiske wajah se 200 ghar prabhavit hain. Kal ek bachche ko andheron mein chot bhi lagi.",
+    "output_data": {
+      "dates": [
+        "pichhle 10 din se",
+        "15 June"
+      ],
+      "people": [
+        "Ramesh Kumar"
+      ],
+      "locations": [
+        "Ward 14",
+        "Satellite Area",
+        "Ahmedabad"
+      ],
+      "amounts": [
+        "200 ghar"
+      ],
+      "organizations": [
+        "GUVNL office"
+      ],
+      "legal_refs": [],
+      "previous_complaints": [
+        "GUV-2341"
+      ],
+      "key_facts": [
+        "Electricity problem in Ward 14, Satellite Area, Ahmedabad for the past 10 days.",
+        "Complaint filed on June 15th at GUVNL office with ticket number GUV-2341.",
+        "Transformer is faulty, affecting 200 homes.",
+        "A child was injured in the dark yesterday."
+      ],
+      "evidence_strength": 4
+    },
+    "confidence": 0.8,
+    "duration_ms": 4511,
+    "created_at": "2026-06-11T14:01:01.498513"
+  },
+  {
+    "id": 4,
+    "complaint_id": 1,
+    "agent_name": "department_router",
+    "input_data": {
+      "issue_type": "water",
+      "urgency": 3
+    },
+    "output_data": {
+      "department": "Municipal Corporation / AMC",
+      "officer": "Water Supply Officer",
+      "escalation_officer": "Municipal Commissioner",
+      "act": "Water Supply and Sewerage Act",
+      "section": "Section 49",
+      "sla_days": 7,
+      "contact": "155303",
+      "routing_reason": "Direct match from knowledge base for water",
+      "confidence": 0.95,
+      "escalate_immediately": false
+    },
+    "confidence": 0.95,
+    "duration_ms": 1,
+    "created_at": "2026-06-11T14:02:55.174022"
+  },
+  {
+    "id": 5,
+    "complaint_id": 1,
+    "agent_name": "department_router",
+    "input_data": {
+      "issue_type": "electricity",
+      "urgency": 5
+    },
+    "output_data": {
+      "department": "GUVNL / DISCOM",
+      "officer": "Assistant Engineer (AE)",
+      "escalation_officer": "Superintending Engineer",
+      "act": "Electricity Act 2003",
+      "section": "Section 43",
+      "sla_days": 7,
+      "contact": "1912",
+      "routing_reason": "The issue type is electricity, and the GUVNL / DISCOM department handles electricity-related complaints.",
+      "confidence": 1.0,
+      "escalate_immediately": true
+    },
+    "confidence": 1.0,
+    "duration_ms": 4169,
+    "created_at": "2026-06-11T14:02:59.378097"
+  },
+  {
+    "id": 6,
+    "complaint_id": 1,
+    "agent_name": "department_router",
+    "input_data": {
+      "issue_type": "road",
+      "urgency": 2
+    },
+    "output_data": {
+      "department": "Municipal Corporation / PWD",
+      "officer": "Executive Engineer",
+      "escalation_officer": "District Collector",
+      "act": "Municipal Corporation Act",
+      "section": "Section 63",
+      "sla_days": 15,
+      "contact": "155304",
+      "routing_reason": "Direct match from knowledge base for road",
+      "confidence": 0.95,
+      "escalate_immediately": false
+    },
+    "confidence": 0.95,
+    "duration_ms": 1,
+    "created_at": "2026-06-11T14:02:59.411143"
+  },
+  {
+    "id": 7,
+    "complaint_id": 1,
+    "agent_name": "department_router",
+    "input_data": {
+      "issue_type": "rti",
+      "urgency": 1
+    },
+    "output_data": {
+      "department": "Concerned Public Authority",
+      "officer": "Public Information Officer (PIO)",
+      "escalation_officer": "First Appellate Authority",
+      "act": "Right to Information Act 2005",
+      "section": "Section 6",
+      "sla_days": 30,
+      "contact": "pgportal.gov.in",
+      "routing_reason": "Direct match from knowledge base for rti",
+      "confidence": 0.95,
+      "escalate_immediately": false
+    },
+    "confidence": 0.95,
+    "duration_ms": 1,
+    "created_at": "2026-06-11T14:02:59.450552"
+  },
+  {
+    "id": 8,
+    "complaint_id": 1,
+    "agent_name": "response_drafter",
+    "input_data": {
+      "issue_type": "water",
+      "language": "hindi",
+      "letter_type": "Urgent Grievance Letter"
+    },
+    "output_data": {
+      "letter_type": "Urgent Grievance Letter",
+      "language": "hindi",
+      "addressed_to": "Water Supply Officer",
+      "legal_reference": "Water Supply and Sewerage Act — Section 49"
+    },
+    "confidence": 0.9,
+    "duration_ms": 5427,
+    "created_at": "2026-06-11T14:05:02.484633"
+  },
+  {
+    "id": 9,
+    "complaint_id": 1,
+    "agent_name": "task_generator",
+    "input_data": {
+      "issue_type": "water",
+      "urgency": 4,
+      "sla_days": 7
+    },
+    "output_data": {
+      "total_tasks": 7
+    },
+    "confidence": 1.0,
+    "duration_ms": 0,
+    "created_at": "2026-06-11T14:07:19.461120"
+  },
+  {
+    "id": 10,
+    "complaint_id": 3,
+    "agent_name": "classifier",
+    "input_data": "in my arear bharuch , the street light is not working from 5 days . what should i do . it is problem in night.",
+    "output_data": {
+      "issue_type": "electricity",
+      "urgency": 3,
+      "language": "english",
+      "jurisdiction": "municipal",
+      "confidence": 0.9,
+      "reason": "The complaint is about a non-functional street light causing problems at night, indicating a safety and inconvenience issue."
+    },
+    "confidence": 0.9,
+    "duration_ms": 4211,
+    "created_at": "2026-06-11T14:20:42.782199"
+  },
+  {
+    "id": 11,
+    "complaint_id": 3,
+    "agent_name": "evidence_extractor",
+    "input_data": "in my arear bharuch , the street light is not working from 5 days . what should i do . it is problem in night.",
+    "output_data": {
+      "dates": [
+        "5 days"
+      ],
+      "people": [],
+      "locations": [
+        "bharuch"
+      ],
+      "amounts": [],
+      "organizations": [],
+      "legal_refs": [],
+      "previous_complaints": [],
+      "key_facts": [
+        "Street light is not working.",
+        "The issue has persisted for 5 days.",
+        "The location is Bharuch.",
+        "The problem occurs at night."
+      ],
+      "evidence_strength": 3
+    },
+    "confidence": 0.6,
+    "duration_ms": 1610,
+    "created_at": "2026-06-11T14:20:44.427520"
+  },
+  {
+    "id": 12,
+    "complaint_id": 3,
+    "agent_name": "department_router",
+    "input_data": {
+      "issue_type": "electricity",
+      "urgency": 3
+    },
+    "output_data": {
+      "department": "GUVNL / DISCOM",
+      "officer": "Assistant Engineer (AE)",
+      "escalation_officer": "Superintending Engineer",
+      "act": "Electricity Act 2003",
+      "section": "Section 43",
+      "sla_days": 7,
+      "contact": "1912",
+      "routing_reason": "Direct match from knowledge base for electricity",
+      "confidence": 0.95,
+      "escalate_immediately": false
+    },
+    "confidence": 0.95,
+    "duration_ms": 1,
+    "created_at": "2026-06-11T14:20:44.466733"
+  },
+  {
+    "id": 13,
+    "complaint_id": 3,
+    "agent_name": "response_drafter",
+    "input_data": {
+      "issue_type": "electricity",
+      "language": "english",
+      "letter_type": "Grievance Letter"
+    },
+    "output_data": {
+      "letter_type": "Grievance Letter",
+      "language": "english",
+      "addressed_to": "Assistant Engineer (AE)",
+      "legal_reference": "Electricity Act 2003 — Section 43"
+    },
+    "confidence": 0.9,
+    "duration_ms": 2058,
+    "created_at": "2026-06-11T14:20:46.559005"
+  },
+  {
+    "id": 14,
+    "complaint_id": 3,
+    "agent_name": "task_generator",
+    "input_data": {
+      "issue_type": "electricity",
+      "urgency": 3,
+      "sla_days": 7
+    },
+    "output_data": {
+      "total_tasks": 6
+    },
+    "confidence": 1.0,
+    "duration_ms": 0,
+    "created_at": "2026-06-11T14:20:46.633892"
   }
 ]
