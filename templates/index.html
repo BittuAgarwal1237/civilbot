@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RIGHTROUTE</title>
+
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<div class="container">
+
+    <!-- =========================
+         SIDEBAR
+    ========================== -->
+
+    <div class="sidebar">
+
+        <div class="logo">
+            <span class="logo-icon">🚀</span>
+            <span class="logo-text">RIGHTROUTE</span>
+        </div>
+
+        <button
+            class="new-chat"
+            onclick="newComplaint()">
+
+            + New Complaint
+
+        </button>
+
+        <div class="sidebar-title">
+            Recent Complaints
+        </div>
+
+        <div
+            id="history-list"
+            class="history-list">
+
+        </div>
+
+    </div>
+
+    <!-- =========================
+         MAIN CONTENT
+    ========================== -->
+
+    <div class="main-content">
+
+        <!-- Header -->
+
+        <div class="header">
+
+            <h1>RIGHTROUTE</h1>
+
+            <p>
+                Policy-to-Action Civic Intelligence Platform
+            </p>
+
+        </div>
+
+        <!-- Chat Area -->
+
+        <div
+            id="chat-box"
+            class="chat-box">
+
+            <div class="hero">
+
+                <h2>
+                    Report Civic Issues Smarter
+                </h2>
+
+                <p>
+                    AI-powered complaint analysis,
+                    evidence extraction,
+                    department routing,
+                    response generation,
+                    task creation and complaint assistance.
+                </p>
+
+                
+
+            </div>
+
+        </div>
+
+        <!-- Input -->
+
+        <div class="input-area">
+
+            <input
+                type="text"
+                id="complaint"
+                placeholder="Describe your civic issue..."
+            >
+
+            <button onclick="sendComplaint()">
+    Analyze
+</button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="/static/script.js"></script>
+
+</body>
+</html>
