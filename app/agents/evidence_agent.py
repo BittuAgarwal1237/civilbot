@@ -10,40 +10,82 @@ def evidence_agent(text: str) -> EvidenceOutput:
     prompt = f"""
 You are an expert civic evidence extraction agent.
 
+The complaint may be written in:
+- English
+- Hindi
+- Gujarati
+- Hinglish
+- Broken English
+- Typo-filled text
+
 Extract:
 
 - location
+- city
+- state
 - issue
 - duration
 - landmarks
 
 Rules:
 
-- landmarks must always be a list
-- if landmarks are missing return []
-- if location is missing return "not specified"
-- if duration is missing return "not specified"
-- understand English, Hindi, Hinglish, broken English and typos
-- extract landmarks separately from location
+- landmarks must always be a list.
+- If landmarks are missing return [].
+- If location is missing return "not specified".
+- If city cannot be determined return "not specified".
+- If state cannot be determined return "not specified".
+- If duration is missing return "not specified".
+- Correct spelling mistakes.
+- Understand mixed languages.
+- Extract landmarks separately from location.
 
 Examples:
 
-"Water leakage near Saraswati School"
-→ location: near Saraswati School
-→ issue: water leakage
-→ landmarks: ["Saraswati School"]
+Complaint:
+Water leakage near Saraswati School.
 
-"Pothole near railway station for 2 weeks"
-→ location: near railway station
-→ duration: 2 weeks
-→ landmarks: ["railway station"]
+Output:
+location: near Saraswati School
+city: not specified
+state: not specified
+issue: water leakage
+duration: not specified
+landmarks: ["Saraswati School"]
 
-"Mere area me 3 din se pani nahi aa raha"
-→ location: mere area
-→ duration: 3 days
+Complaint:
+Pothole near railway station for 2 weeks.
+
+Output:
+location: near railway station
+city: not specified
+state: not specified
+issue: pothole
+duration: 2 weeks
+landmarks: ["railway station"]
+
+Complaint:
+Hamare Jahangirpura area me light nahi hai 2 din se.
+
+Output:
+location: Jahangirpura
+city: Surat
+state: Gujarat
+issue: electricity outage
+duration: 2 days
+landmarks: []
+
+Complaint:
+મારા વિસ્તારમાં ગેસ લીકેજ છે.
+
+Output:
+location: not specified
+city: not specified
+state: Gujarat
+issue: gas leakage
+duration: not specified
+landmarks: []
 
 Complaint:
 {text}
 """
-
     return structured_llm.invoke(prompt)

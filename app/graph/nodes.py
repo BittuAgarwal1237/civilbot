@@ -86,15 +86,3 @@ def task_node(state):
     state["task"] = result.model_dump()
 
     return state
-
-def letter_node(state):
-
-    result = letter_agent(
-        issue_type=state["classification"]["issue_type"],
-        department=state["department"],
-        location=state["evidence"]["location"]
-    )
-
-    state["letter"] = result.model_dump()
-
-    return state

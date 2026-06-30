@@ -1,13 +1,12 @@
 from fastapi import FastAPI, Request
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
-from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel  
+from fastapi.middleware.cors import CORSMiddleware 
 from app.models.complaint import ComplaintRequest
 from app.graph.workflow import workflow
 from app.repositories.complaint_repository import save_complaint
 from app.agents.letter_agent import letter_agent
-
+from app.models.request import LetterRequest
 
 app = FastAPI()
 
@@ -22,12 +21,6 @@ app.add_middleware(
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
 templates = Jinja2Templates(directory="templates")
-
-
-class LetterRequest(BaseModel):
-    issue_type: str
-    location: str
-    department: str
 
 
 @app.get("/")
@@ -74,12 +67,37 @@ def generate_letter(request: LetterRequest):
         result = letter_agent(
             issue_type=request.issue_type,
             location=request.location,
-            department=request.department
+            department=request.department,
+            user=request.user
         )
 
         print(result)
 
+        department = request.department
+
+        email = ""
+
+        if department == "Electricity":
+            email = "ce.dgvcl@gebmail.com"
+
+        elif department == "Water Supply":
+            email = "commissioner@suratmunicipal.gov.in"
+
+        elif department == "Road Maintenance":
+            email = "commissioner@suratmunicipal.gov.in"
+
+        elif department == "Sanitation":
+            email = "commissioner@suratmunicipal.gov.in"
+
+        elif department == "Public Safety":
+            email = "commissioner@suratmunicipal.gov.in"
+
+        else:
+            email = ""
+
         return {
+            "to": email,
+            "subject": result.subject,
             "letter": result.letter
         }
 

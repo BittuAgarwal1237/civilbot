@@ -8,7 +8,8 @@ structured_llm = llm.with_structured_output(
 def letter_agent(
     issue_type: str,
     location: str,
-    department: str
+    department: str,
+    user
 ) -> LetterOutput:
 
     prompt = f"""
@@ -16,24 +17,48 @@ You are an expert government complaint letter writer.
 
 Generate a professional and formal complaint letter.
 
+Citizen Details
+
+Name: {user.name}
+
+Email: {user.email}
+
+Phone: {user.phone}
+
+Address: {user.address}
+
+Complaint Details
+
 Issue Type: {issue_type}
+
 Location: {location}
+
 Department: {department}
 
 Instructions:
 
-- Create a clear and professional subject.
+- Create a clear professional subject.
 - Address the correct department.
 - Mention the issue and location.
 - Explain the inconvenience caused.
-- Request immediate investigation and resolution.
-- Use formal government letter language.
-- End with a polite closing.
-- Include ONLY:
-  [Citizen Name]
-- Do NOT include address, city, state, pincode, phone number, email, or date placeholders.
+- Request immediate action.
+- Use formal government language.
+- Do NOT use placeholders like [Citizen Name].
+- Use the actual citizen information provided above.
 
-Return:
+End the letter exactly like this:
+
+Sincerely,
+
+{user.name}
+
+Phone: {user.phone}
+
+Email: {user.email}
+
+Address: {user.address}
+
+Return only:
 
 - subject
 - letter

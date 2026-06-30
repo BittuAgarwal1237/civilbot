@@ -33,3 +33,5 @@ class TaskOutput(BaseModel):
 class LetterOutput(BaseModel):
     subject: str
     letter: str    
+
+    
